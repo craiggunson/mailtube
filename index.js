@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
 
         var outparams = {
             Destination: {
-                ToAddresses: ["cbgunson@gmail.com"]
+                ToAddresses: [process.env.privateaddress]
             },
             Message: {
                 Body: { Text: { Data: email.text } },
