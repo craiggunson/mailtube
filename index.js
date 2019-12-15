@@ -5,7 +5,6 @@ const simpleParser = require('mailparser').simpleParser;
 const s3 = new aws.S3({ apiVersion: '2006-03-01' });
 const sesout = new aws.SES({region: 'us-west-2'});
 
-
 exports.handler = async (event, context) => {
     //console.log('Received event:', JSON.stringify(event, null, 2));
     const bucket = event.Records[0].s3.bucket.name;
@@ -31,8 +30,10 @@ exports.handler = async (event, context) => {
             Message: {
                 Body: { Text: { Data: email.text } },
                 Subject: { Data: email.subject }
+
             },
-            Source: email.from.text
+            ReplyToAddresses: [ email.from.text ],
+            Source: "craig@craiggunson.com"
         };
 
         const outdata = await sesout.sendEmail(outparams).promise()
