@@ -1,5 +1,4 @@
 # mailtube
-Receive inbound email from SES+S3 and send it on with Lambda.
+Receive inbound email from your custom domain and into SES+S3 and send it on to a private inbox with Lambda.
 
-I use this to route email from my homepage and route to a private mailbox.  No need for a subscription, and has lots of potential.
 
