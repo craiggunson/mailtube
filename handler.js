@@ -5,7 +5,6 @@ const simpleParser = require('mailparser').simpleParser;
 const s3 = new aws.S3({ apiVersion: '2006-03-01' });
 const sesout = new aws.SES({region: 'us-west-2'});
 
-
 module.exports.email = async event => {
   //console.log('Received event:', JSON.stringify(event, null, 2));
   const bucket = event.Records[0].s3.bucket.name;
@@ -31,7 +30,6 @@ module.exports.email = async event => {
           Message: {
               Body: { Text: { Data: email.text } },
               Subject: { Data: email.subject }
-
           },
           ReplyToAddresses: [ email.from.text ],
           Source: "craig@craiggunson.com"
@@ -47,4 +45,3 @@ module.exports.email = async event => {
       throw new Error(message);
   }
 };
-
