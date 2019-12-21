@@ -19,8 +19,6 @@
   "author": "Craig Gunson",
   "license": "MIT",
   "dependencies": {
-    "mailparser": "^2.7.7",
-    "serverless": "^1.60.0",
-    "serverless-plugin-canary-deployments": "^0.4.8"
+    "mailparser": "^2.7.7"
   }
 }
