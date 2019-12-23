@@ -4,6 +4,12 @@ const aws = require('aws-sdk');
 const simpleParser = require('mailparser').simpleParser;
 const s3 = new aws.S3({ apiVersion: '2006-03-01' });
 const sesout = new aws.SES({region: 'us-west-2'});
+let nodemailer = require('nodemailer');
+let transporter = nodemailer.createTransport({
+    SES: new aws.SES({
+        apiVersion: '2010-12-01'
+    })
+});
 
 module.exports.email = async event => {
   //console.log('Received event:', JSON.stringify(event, null, 2));
@@ -23,19 +29,18 @@ module.exports.email = async event => {
       console.log('from:', email.from.text);
       console.log('attachments:', email.attachments);
 
-      var outparams = {
-          Destination: {
-              ToAddresses: [process.env.privateaddress]
-          },
-          Message: {
-              Body: { Text: { Data: email.text } },
-              Subject: { Data: email.subject }
-          },
-          ReplyToAddresses: [ email.from.text ],
-          Source: "craig@craiggunson.com"
-      };
-
-      const outdata = await sesout.sendEmail(outparams).promise()
+      const sendit = await transporter.sendMail({
+        from: "craig@craiggunson.com",
+        to: process.env.privateaddress,
+        subject: email.subject,
+        text: email.text,
+        attachments: email.attachments
+         
+        
+    });
+        console.log(sendit.envelope);
+        console.log(sendit.messageId);
+    
       return { status: 'success' };
 
   } catch (err) {
