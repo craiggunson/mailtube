@@ -2,7 +2,10 @@
 Receive inbound email from your own domain and send to a private inbox.
 
 ### AWS Services  
-`SES`, `S3`, `Lambda` 
+`SES` Receive email with appropriate MX records.  
+`S3` Inbound emails are saved (by SES) to S3.  
+`Lambda` is triggered by the S3 PUT event, and sends the email onward.  
+
 
 ### NPMs  
 `serverless` Packaging & deployment.  
