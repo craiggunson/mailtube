@@ -23,6 +23,11 @@ functions:
     handler: handler.email
     environment:
       privateaddress: cbgunson@gmail.com
+    events:
+      - s3:
+          bucket: craiggunson.email
+          event: s3:ObjectCreated:Put
+          existing: true
     #deploymentSettings:
       #type: Linear10PercentEvery1Minute
       #alias: Live
