@@ -32,6 +32,7 @@ module.exports.email = async event => {
       const sendit = await transporter.sendMail({
         from: "craig@craiggunson.com",
         to: process.env.privateaddress,
+        replyTo: email.from.text,
         subject: email.subject,
         text: email.text,
         attachments: email.attachments
