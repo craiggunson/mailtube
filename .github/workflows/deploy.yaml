@@ -27,3 +27,6 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.MYKEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.MYSECRET }}
         AWS-REGION: us-west-2
+        SERVERLESS_ACCESS_KEY: ${{ secrets.secrets.MYKEY }}
+        SERVERLESS_SECRET_ACCESS_KEY: ${{ secrets.MYSECRET }}
+
