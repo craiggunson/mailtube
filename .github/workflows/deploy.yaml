@@ -23,6 +23,7 @@ jobs:
       uses: serverless/github-action@master
       with:
         args: deploy
-        aws-access-key-id: ${{ secrets.MYKEY }}
-        aws-secret-access-key: ${{ secrets.MYSECRET }}
-        aws-region: us-west-2
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.MYKEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.MYSECRET }}
+        AWS-REGION: us-west-2
