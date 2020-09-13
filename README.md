@@ -1,5 +1,7 @@
 # mailtube
 Receive inbound email from your own domain and send to a private inbox.
+![Build](https://github.com/craiggunson/mailtube/workflows/mailtube/badge.svg)
+
 
 ### AWS Services  
 `SES` Receive email with appropriate MX records.  
