@@ -1,0 +1,34 @@
+service: mailtube
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-west-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:Get*
+        - s3:List*
+      Resource: arn:aws:s3:::craiggunson.email/*
+    - Effect: Allow
+      Action:
+        - ses:SendEmail
+        - ses:SendRawEmail
+      Resource: '*'
+
+#plugins:
+  #- serverless-plugin-canary-deployments
+functions:
+  mailtube:
+    handler: handler.email
+    environment:
+      privateaddress: cbgunson@gmail.com
+    events:
+      - s3:
+          bucket: craiggunson.email
+          event: s3:ObjectCreated:Put
+          existing: true
+    #deploymentSettings:
+      #type: Linear10PercentEvery1Minute
+      #alias: Live
+
